@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import { marked } from "marked";
 import useLocalStorage from "./hooks/useLocalStorage";
+import Docs from "./components/Docs";
 
 const App = () => {
   // const [code, setCode] = useState("## Hello");
@@ -11,15 +12,23 @@ const App = () => {
   const compiled = marked.parse(code); // it will parse the value from local storage when added
 
   const [hide, hidePreview] = useState(true);
+  const [showDocs, setShowDocs] = useState(false);
 
   const openMD = () => {
     console.log(0);
     hidePreview(true);
+    setShowDocs(false);
   };
 
   const openPreview = () => {
     console.log(0);
     hidePreview(false);
+    setShowDocs(false);
+  };
+
+  const openDocs = () => {
+    console.log(0);
+    setShowDocs(true);
   };
 
   const handleChange = (e) => {
@@ -36,16 +45,17 @@ const App = () => {
             MarkDown
           </button>
           <button onClick={openPreview}>Preview</button>
+          <button onClick={openDocs}>docs</button>
         </div>
-        {hide ? (
-          <div>
+        <div className="editor-container">
+          {showDocs ? (
+            <Docs />
+          ) : hide && !showDocs ? (
             <textarea onChange={handleChange} value={code} />
-          </div>
-        ) : (
-          <div>
-            <textarea value={compiled} />
-          </div>
-        )}
+          ) : (
+            <textarea value={compiled} readOnly />
+          )}
+        </div>
       </div>
     </>
   );

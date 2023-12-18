@@ -13,3 +13,7 @@ best of luck.
 ## Mostafa Yasser Mansour (solve)
 
 I created useLocalStorage custom hook for saving the markdown text in the local storage
+
+The api doesn't work because the cors settings are not available
+
+so I created a local file in 'public' folder 'data.json' file fetched in the 'Docs' component
